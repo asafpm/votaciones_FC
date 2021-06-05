@@ -5,16 +5,16 @@ Para utilizar este sistema usando google forms sólo es necesario agregar una pr
 * Esta pregunta debe estar marcada como obligatoria.
 * En la configuración de la pregunta elegir la opción de 'Validación de respuesta'. En el tipo de validación elegir 'Expresión regular' y 'Coincidencias' (Matches)
 * En la sección de patrón colocar el más indicado para tu votación. Esta validación servirá para hacer un prefiltrado de los certificados aceptados (debes reemplazar el TU_ID_VOTACIÓN por el que elegiste previamente):
- * Todos pueden votar:
-  * `^\s*###\n\{"roles":\{.*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
- * Sólo estudiantes votan:
-  * `^\s*###\n\{"roles":\{.*estudiante.*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
- * Sólo profesores o ayudantes votan:
-  * `^\s*###\n\{"roles":\{.*(profesor|ayudante).*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
- * Todos los activos en 2020-2,2021-1,2021-2 votan:
-  * `^\s*###\n\{"roles":\{.*(20202|20211|20212).*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
- * Estudiantes activos en 2020-2,2021-1,2021-2 votan:
-  * `^\s*###\n\{"roles":\{.*"estudiante":(20202|20211|20212).*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
+  * Todos pueden votar:
+    * `^\s*###\n\{"roles":\{.*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
+  * Sólo estudiantes votan:
+    * `^\s*###\n\{"roles":\{.*estudiante.*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
+  * Sólo profesores o ayudantes votan:
+    * `^\s*###\n\{"roles":\{.*(profesor|ayudante).*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
+  * Todos los activos en 2020-2,2021-1,2021-2 votan:
+    * `^\s*###\n\{"roles":\{.*(20202|20211|20212).*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
+  * Estudiantes activos en 2020-2,2021-1,2021-2 votan:
+    * `^\s*###\n\{"roles":\{.*"estudiante":(20202|20211|20212).*\},"id_votación":"TU_ID_VOTACIÓN".*\}\n-----BEGIN SIGNATURE-----\n\S{684}\n-----END SIGNATURE-----\n###\s*$`
 * Procura poner un mensaje de error personalizado descriptivo. Por ejemplo: *Verifica que el token empieza y termina con "###" y que el Nombre de la Votación es "TU_ID_VOTACIÓN". Si alteras tu token de cualquier forma tu voto será anulado*.
 * El resultado de esto se ve así:
 ![screenshot_token](imgs/screenshot_token.png)
