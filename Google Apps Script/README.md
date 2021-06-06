@@ -29,14 +29,19 @@ verifica.gs
 jsrsasign-all-min.js.gs (agregué dos líneas al inicio para poderlo usar en appsscript)
 appsscript.json Para mostrarlo ir a settings y poner "Show appsscript.json" manifest in file editor
 ```
+  
+  
 El editor debe quedar como en esta captura de pantalla:
 ![apps_script_editor](imgs/apps_script_editor.png)
-
+  
+  
+  
 
 El script en `verifica.gs` agrega un menú `Verificador` al sheets para poder validar los resultados.
 ![screenshot_sheet](imgs/screenshot_sheet.png)
-
-
+  
+  
+  
 También hay un `key_test.gs` que sirve para probar que la verificación funcione pero éste no se necesita para usar este sistema.
 
 El archivo `jsrsasign-all-min.js` es una biblioteca de funciones criptográficas (Para más información véase [jsrasign](https://github.com/kjur/jsrsasign)).
