@@ -23,7 +23,7 @@ IMPORTANTE: La pregunta del certificado **debe ser la última** en el formulario
 
 # ¿Cómo validar los tokens presentados en la votación?
 
-Para validar los resultados, hay que generar un Google Sheet asociado a los resultados de Google Forms. Dentro del Sheet de resultados hay que entrar a Tools->ScriptEditor y agregar los archivos
+Para validar los resultados, hay que generar un Google Sheet asociado a los resultados de Google Forms. Dentro del Sheet de resultados hay que entrar a Extensiones->Apps Script y agregar los archivos
 ```
 verifica.gs
 jsrsasign-all-min.js.gs (agregué dos líneas al inicio para poderlo usar en appsscript)
