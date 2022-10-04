@@ -61,46 +61,58 @@ function verificarCertificados() {
     var message = parts[1];
     var signature = parts[3];
 
-    contents = jsonParse(message)
-    
-    var id_cert = contents['id_certificado'];
-    var id_votacion = contents['id_votación'];
-    var roles = contents['roles'];
+    try {
+      contents = jsonParse(message)
+      
+      var id_cert = contents['id_certificado'];
+      var id_votacion = contents['id_votación'];
+      var roles = contents['roles'];
 
-    // Agregar id_cert
-    verified_results.getRange(i+1,cert_col_idx+2).setValue(id_cert);
+      // Agregar id_cert
+      verified_results.getRange(i+1,cert_col_idx+2).setValue(id_cert);
 
-    // Agregar id_votacion
-    verified_results.getRange(i+1,cert_col_idx+3).setValue(id_votacion);
+      // Agregar id_votacion
+      verified_results.getRange(i+1,cert_col_idx+3).setValue(id_votacion);
 
-    // Verificar firma
-    var valid_sign = pubKey.verify(message, b64tohex(signature));
-    if(valid_sign) {
-      verified_results.getRange(i+1,cert_col_idx+4).setValue(1);
-    } else {
+      // Verificar firma
+      var valid_sign = pubKey.verify(message, b64tohex(signature));
+      if(valid_sign) {
+        verified_results.getRange(i+1,cert_col_idx+4).setValue(1);
+      } else {
+        verified_results.getRange(i+1,cert_col_idx+4).setValue(0);
+      }
+
+      // Revisar que sea la primera vez que se usa el certificado
+      if(used_certs.indexOf(id_cert)<0 && valid_sign) {
+        verified_results.getRange(i+1,cert_col_idx+5).setValue(1);
+        used_certs.push(id_cert);
+      } else {
+        verified_results.getRange(i+1,cert_col_idx+5).setValue(0);
+      }
+
+      // Agregar roles de votante
+      if('estudiante' in roles) {
+        verified_results.getRange(i+1,cert_col_idx+6).setValue(roles['estudiante']);
+      }
+      if('profesor' in roles) {
+        verified_results.getRange(i+1,cert_col_idx+7).setValue(roles['profesor']); 
+      }
+      if('ayudante' in roles) {
+        verified_results.getRange(i+1,cert_col_idx+8).setValue(roles['ayudante']);
+      }
+
+    } catch (error) {
+      Logger.log(error)
+
+      //Poner que la firma no es válida
       verified_results.getRange(i+1,cert_col_idx+4).setValue(0);
-    }
 
-    // Revisar que sea la primera vez que se usa el certificado
-    if(used_certs.indexOf(id_cert)<0 && valid_sign) {
-      verified_results.getRange(i+1,cert_col_idx+5).setValue(1);
-      used_certs.push(id_cert);
-    } else {
+      //Poner que no es un "primer uso válido"
       verified_results.getRange(i+1,cert_col_idx+5).setValue(0);
-    }
-
-    // Agregar roles de votante
-    if('estudiante' in roles) {
-      verified_results.getRange(i+1,cert_col_idx+6).setValue(roles['estudiante']);
-    }
-    if('profesor' in roles) {
-      verified_results.getRange(i+1,cert_col_idx+7).setValue(roles['profesor']); 
-    }
-    if('ayudante' in roles) {
-      verified_results.getRange(i+1,cert_col_idx+8).setValue(roles['ayudante']);
     }
     
 
   }
 
 }
+
